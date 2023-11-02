@@ -1,0 +1,3 @@
+﻿  My_list.cpp
+D:\Prog_Dev\Microsoft Visual Studio\source\repos\My_list\My_list.cpp(32): warning C4172: возвращение адреса локальной или временной переменной : other
+  My_list.vcxproj -> D:\Prog_Dev\Microsoft Visual Studio\source\repos\My_list\x64\Debug\My_list.exe
