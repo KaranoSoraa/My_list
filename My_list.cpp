@@ -2,15 +2,15 @@
 #include<list>
 
 using namespace std;
-
+template<typename T>
 class List {
 	class Node {
 	public:
-		int val = 0;
+		T val;
 		Node* priv = nullptr;
 		Node* next = nullptr;
-		Node() {}
-		Node(int val, Node* priv, Node* next) : val(val), priv(priv), next(next) {
+		Node() = default;
+		Node(const T& val, Node* priv, Node* next) : val(val), priv(priv), next(next) {
 
 		}
 		};
@@ -32,7 +32,7 @@ public:
 			return other;
 		}
 		// Разыменование.
-		int& operator*() const {
+		T& operator*() const {
 			return nd->val;
 		}
 		// Равенство указателей на ноды.
@@ -53,12 +53,13 @@ public:
 	}
 	// Coppy
 	List(const List& other) : List() { // вызвали конструктор по умолчанию.
+		cout << "Coppy\n";
 		for (Iter it = first; it != last; ++it) {
 			this->push_back(*it); // В конец листа вставляем значение.
 		}
 	}
 	// Функции
-	Iter insert(const Iter& it_l, const int x) {
+	Iter insert(const Iter& it_l, const T& x) {
 		//1 2 3-> <-x-> <-4
 		if (this->empty()) {
 			Iter it(new Node(x, nullptr, it_l.nd));
@@ -73,7 +74,7 @@ public:
 		it_r.nd->priv = it.nd;
 		return it;
 	}
-	Iter push_back(const int x) {
+	Iter push_back(const T x) {
 		// 1 2 3 <-
 		if (this->empty()) return this->insert(Iter(last), x);
 		return this->insert(Iter(last.nd->priv), x);
@@ -103,15 +104,17 @@ private:
 };
 
 int main() {
-	List l;
+	List<string> l;
+	
 	int n;
 	cin >> n;
 	for (int i = 0; i < n; ++i) {
-		int x;
+		string x;
 		cin >> x;
 		l.push_back(x);
 	}
-	List::Iter it;
+	
+	List<string>::Iter it;
 	for (it = l.begin(); it != l.end(); ++it) {
 		cout << *it << ' ';
 	}
